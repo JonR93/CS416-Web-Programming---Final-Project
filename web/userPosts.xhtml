@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>User Posts</title>
+        <h:outputStylesheet name="./css/style.css"/>
+    </h:head>
+    <h:body>
+        <ul>
+            <li><a href="addPost.xhtml">Add Post</a></li>
+            <li><a href="userPosts.xhtml">View Posts</a></li>
+        </ul>
+        
+        <c:forEach var="message" items="#{postController.allPosts}" varStatus="loop" >
+            <h:form>
+            <table>
+            <tr>
+                <td colspan="4"><b>#{message.siteUser.userName}</b> <span style="font-size:x-small">#{message.datePosted}</span></td>
+            </tr>
+            <tr>
+                <td><h:commandButton action="#{postController.addLike(message)}" value="Like" image="resources/img/thumbUp-small.png" ></h:commandButton></td>
+                <td><h:outputText  value="#{message.numOfLikes}" ></h:outputText></td>
+                <td><h:commandButton action="#{postController.addDislike(message)}" value="Dislike" image="resources/img/thumbDown-small.png" ></h:commandButton></td>
+                <td style="padding-left:2em">#{message.message}</td>
+            </tr>
+            <tr>
+            </tr>
+                <tr><td></td></tr>
+            </table>
+            </h:form>
+        </c:forEach>  
+    </h:body>
+</html>
+
